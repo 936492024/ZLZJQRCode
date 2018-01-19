@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#323233"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:background="#333434"
+        android:layout_width="match_parent"
+        android:layout_height="50px">
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="#333434"
+        android:layout_width="match_parent"
+        android:layout_height="150px">
+        <RelativeLayout
+            android:id="@+id/user_add_back"
+            android:layout_width="160px"
+            android:layout_height="match_parent">
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="添加成员"
+            android:textColor="@color/white"
+            android:textSize="54px" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight="1.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="125px"
+            android:layout_marginStart="125px"
+            android:layout_marginTop="80px"
+            android:text="恭喜您的团队又壮大了！"
+            android:textColor="#D6D6D6"
+            android:textSize="51px"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignStart="@+id/textView2"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="57px"
+            android:text="请录入您下级事业合伙人的有效信息"
+            android:textColor="#D6D6D6"
+            android:textSize="45px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="5.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <RelativeLayout
+            android:layout_marginTop="35px"
+            android:id="@+id/ok_choice"
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textViesw2"
+                android:layout_alignStart="@+id/textViesw2"
+                android:layout_centerVertical="true"
+                android:enabled="false"
+                android:hint="负责区域："
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="43px"
+                android:theme="@style/MyEditText" />
+
+            <TextView
+                android:layout_marginBottom="22px"
+                android:layout_marginLeft="130px"
+                android:layout_marginRight="130px"
+                android:layout_width="match_parent"
+                android:layout_height="5px"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/primary_blue"
+                android:id="@+id/textViesw2" />
+
+
+
+            <TextView
+                android:visibility="gone"
+                android:singleLine="true"
+                android:id="@+id/area_text_2"
+                android:layout_marginLeft="115dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editText"
+                android:layout_alignBottom="@+id/editText"
+                android:layout_alignEnd="@+id/textViesw2"
+                android:layout_alignRight="@+id/textViesw2"
+                android:text=""
+                android:textColor="#399BFF"
+                android:textSize="43px" />
+
+            <TextView
+                android:id="@+id/area_text"
+                android:textSize="43px"
+                android:textColor="#399BFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/editText"
+                android:layout_alignBottom="@+id/editText"
+                android:layout_alignLeft="@+id/editText"
+                android:layout_alignStart="@+id/editText"
+                android:layout_marginLeft="91dp"
+                android:layout_marginStart="91dp"
+                android:text="选择地址 >" />
+        </RelativeLayout>
+
+        <EditText
+            android:layout_marginTop="35px"
+            android:id="@+id/ok_area"
+            android:theme="@style/MyEditText"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:textSize="43px"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="负责范围备注"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="25px"
+            android:id="@+id/ok_name"
+            android:theme="@style/MyEditText"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:textSize="43px"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="请输入姓名"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="35px"
+            android:id="@+id/ok_idcard"
+            android:theme="@style/MyEditText"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:textSize="43px"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="请输入身份证号码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+        <EditText
+            android:layout_marginTop="35px"
+            android:id="@+id/ok_phone_1"
+            android:theme="@style/MyEditText"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:textSize="43px"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="请输入手机号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="35px"
+            android:id="@+id/ok_phone_2"
+            android:theme="@style/MyEditText"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:textSize="43px"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="请确认手机号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/ok_ok"
+            android:layout_marginTop="80px"
+            android:textColor="@color/white"
+            android:textSize="45px"
+            android:background="@drawable/round_blue"
+            android:text="确认提交"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:layout_width="match_parent"
+            android:layout_height="120px" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="秀芳华全球合伙人营销管理系统"
+            android:textColor="#D6D6D6"
+            android:textSize="48px" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

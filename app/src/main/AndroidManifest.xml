@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.asus.zlzjqrcode">
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <application
+        android:name=".base.BPApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:replace="android:icon, android:label,android:theme"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.Stact_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".ThreeActivity" />
+        <activity android:name=".MainActivity"/>
+        <service android:name=".service.ServiceLogin"/>
+        <activity android:name=".activity.Main_Activity"/>
+        <activity android:name=".activity.UserListActivity"/>
+        <activity android:name=".activity.UserSetActivity"/>
+        <activity android:name=".activity.JoinActivity"/>
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.Make_PasswordActivity"/>
+        <activity android:name=".activity.Forget_PassWordActivity"/>
+        <activity android:name=".activity.MoneyActivity"/>
+        <service android:name=".service.DemoService_2"/>
+        <activity
+            android:name=".utils.CustomVersionDialogActivity"
+            android:theme="@style/versionCheckLibvtransparentTheme" />
+    </application>
+
+
+
+</manifest>

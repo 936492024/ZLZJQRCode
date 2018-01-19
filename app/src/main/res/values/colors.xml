@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="scan_corner_color">#0effc2</color>
+
+    <color name="result_view">#b0000000</color>
+
+    <color name="viewfinder_mask">#60000000</color>
+
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <color name="viewfinder_frame">#ff000000</color>
+
+    <color name="viewfinder_laser">#ffff0000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="bbbbbaaaaa">#ff9f89</color>
+
+    <!-- 常用颜色 -->
+
+
+    <color name="white">#ffffff</color>
+
+    <color name="light_gray">#f3f3f3</color>
+
+    <color name="black">#000000</color>
+
+    <color name="textcolor">#5A5C5B</color>
+
+    <color name="hintcolor">#1ea3e1</color>
+
+    <color name="common_text">#4a4a4a</color>
+
+    <color name="normal_gray">#9b9b9b</color>
+
+    <color name="text_color">#333333</color>
+
+    <color name="my_text">#ff4b4b</color>
+
+    <!-- 系统主色调 -->
+
+
+    <color name="common_main">#1ea3e1</color>
+
+    <color name="common_main_select">#00bfff</color>
+
+    <!-- 通用页面背景色 -->
+
+
+    <color name="common_background">#e6e6e6</color>
+
+    <!-- 通用提示文字颜色 -->
+
+
+    <color name="common_hint">#CCC</color>
+
+    <!-- 页签获取焦点后背景颜色 -->
+
+
+    <color name="page_focus_bg">#3290BF</color>
+
+    <!-- 页签获取焦点后字体颜色 -->
+
+
+    <color name="page_focus_text">#3290BF</color>
+
+    <!-- 页签失去焦点后背景颜色 -->
+
+
+    <color name="page_unfocus_bg">#EEEEED</color>
+
+    <!-- 页签失去焦点后字体颜色 -->
+
+
+    <color name="page_unfocus_text">#000000</color>
+
+    <!-- 待选择的文字颜色 -->
+
+
+    <color name="select_text">#8E8E8E</color>
+
+    <!-- 账户选择时,转入图标背景 -->
+
+
+    <color name="account_in_bg">#2D9BD7</color>
+
+    <!-- 账户选择时,转出图标背景 -->
+
+
+    <color name="account_out_bg">#F18E4C</color>
+
+    <color name="list_item_ture">#e5e5e5</color>
+
+    <color name="list_item_flast">#ffffff</color>
+
+
+    <!-- QRCode scanner color begin -->
+
+
+    <color name="result_point_color">#C0FFFF00</color>
+
+    <color name="laser_color">#0F0</color>
+
+    <color name="corner_color">#00FF00</color>
+
+
+    <color name="primary_blue">#399BFF</color>
+
+
+    <color name="color_primary">#F44336</color>
+    <color name="color_primaryDark">#D32F2F</color>
+    <color name="color_accent">#2196F3</color>
+
+    <color name="grey">#D6D6D6</color>
+    <color name="greys">#ff7b828b</color>
+    <color name="little_grey">#EBEBEB</color>
+    <color name="title_bg_color">#1D2228</color>
+    <color name="middle_grey">#CACACA</color>
+    <color name="trans">#00000000</color>
+</resources>

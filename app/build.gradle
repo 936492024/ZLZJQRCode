@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+
+    defaultConfig {
+        applicationId "com.example.asus.zlzjqrcode"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 7
+        versionName "0.0.6"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+repositories{
+    flatDir{
+        mavenCentral()
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:25.3.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'pub.devrel:easypermissions:0.2.0'
+    implementation project(':lib-zxing')
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //dialog
+    compile 'cn.pedant.sweetalert:library:1.3'
+    implementation files('libs/json-lib-2.4-all-jdk15.jar')
+    compile 'com.android.support:cardview-v7:25.2.0'
+    compile 'com.bigkoo:pickerview:2.1.1'
+    implementation files('libs/eventbus.jar')
+    compile 'com.zhy:autolayout:1.4.3'
+    compile 'com.allenliu.versionchecklib:library:1.8.2'
+    compile 'pub.devrel:easypermissions:0.3.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    implementation project(':citypickerview')
+}

@@ -1,0 +1,70 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+    <style name="MyEditText" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="colorAccent">@color/colorPrimary</item>-->
+        <!--&lt;!&ndash; AppCompatEditText默认状态状态设置底线颜色 &ndash;&gt;-->
+        <item name="colorControlNormal">@color/primary_blue</item>
+        <!--&lt;!&ndash; AppCompatEditText选择的底线颜色 &ndash;&gt;-->
+        <!--<item name="colorControlActivated">#c6174e</item>-->
+    </style>
+
+    <style name="AppTheme.DrawerArrowToggle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style parent="@android:style/Theme.Dialog" name="progress_dialog">
+
+    <item name="android:windowFrame">@null</item>
+
+    <item name="android:windowIsFloating">true</item>
+
+    <item name="android:windowIsTranslucent">true</item>
+
+    <item name="android:windowNoTitle">true</item>
+
+    <item name="android:background">@null</item>
+
+    <item name="android:windowBackground">@null</item>
+
+    <item name="android:backgroundDimEnabled">false</item>
+
+</style>
+
+
+    <style name="TextViewStyleLeft">
+        <item name="android:layout_width">@dimen/leftWidth</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <declare-styleable name="percentRelativeLayout">
+        <attr name="layout_widthPercent" format="float"></attr>
+        <attr name="layout_heightPercent" format="float"></attr>
+    </declare-styleable>
+    <style name="TextViewStyleRight">
+        <item name="android:layout_width">@dimen/rightItemWidth</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="transparentFrameWindowStyle" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/photo_choose_bg</item>
+    </style>
+    <style name="anim_style">
+        <item name="android:windowEnterAnimation">@anim/dialog_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_anim_out</item>
+    </style>
+</resources>
