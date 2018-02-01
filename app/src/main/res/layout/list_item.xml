@@ -2,16 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="40dp" >
 
     <TextView
         android:id="@+id/text_id"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
         android:textColor="#000000"
         android:textSize="15sp"
         android:singleLine="true"
@@ -25,17 +23,15 @@
     <TextView
         android:id="@+id/text_goods_name"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
         android:textColor="#000000"
         android:textSize="15sp"
         android:singleLine="true"
         android:gravity="center"
         android:text="下级合作者" />
-    
-     <View 
+
+     <View
         android:layout_width="1dip"
         android:layout_height="fill_parent"
         android:background="#B4B3B3"/>
@@ -43,7 +39,7 @@
      <TextView
         android:id="@+id/text_codeBar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:paddingBottom="10dip"
         android:textColor="#000000"

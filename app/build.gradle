@@ -7,8 +7,8 @@ android {
         applicationId "com.example.asus.zlzjqrcode"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 7
-        versionName "0.0.6"
+        versionCode 20
+        versionName "0.1.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -48,4 +48,7 @@ dependencies {
     compile 'pub.devrel:easypermissions:0.3.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     implementation project(':citypickerview')
+    implementation files('libs/MobCommons-2017.1201.1507.jar')
+    implementation files('libs/MobTools-2017.1201.1507.jar')
+    implementation files('libs/nineoldandroids.jar')
 }

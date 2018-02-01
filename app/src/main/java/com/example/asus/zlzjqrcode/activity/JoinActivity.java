@@ -1,6 +1,7 @@
 package com.example.asus.zlzjqrcode.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -33,6 +34,7 @@ import com.example.asus.zlzjqrcode.eventbus.MainSendEvent;
 import com.example.asus.zlzjqrcode.network.MainPresenter;
 import com.example.asus.zlzjqrcode.network.MainView;
 import com.example.asus.zlzjqrcode.utils.CreateMD5;
+import com.example.asus.zlzjqrcode.utils.FloatLabeledEditText;
 import com.example.asus.zlzjqrcode.utils.StatusBarUtils;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -61,17 +63,22 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
     private RelativeLayout ok_choice,user_add_back;
     private Button ok_ok;
     private String id_regular="^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$";
-    private TextView area_text,area_text_2;
+    private TextView area_text,area_text_2,id_card_2,id_phone_2,id_phone_3;
     private MainPresenter mainPresenter;
     private String provinces,citys,areas;
     public CityConfig.WheelType mWheelType;
     private boolean isShowBg = false;
     private int visibleItems = 5;
+    private Dialog progressDialog;
     private String defaultProvinceName = "北京";
-
+    String numbers_1="";
+    String numbers_2="";
+    String numbers_3="";
     private String defaultCityName = "北京";
 
     private String defaultDistrict = "东城区";
+
+    private FloatLabeledEditText floatLabeledEditText;
 
     @Override
     public void addLayout() {
@@ -84,6 +91,7 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
                 .init();
         mainPresenter=new MainPresenter(this,this);
         ok_name=(EditText) findViewById(R.id.ok_name);
+        id_card_2= (TextView) findViewById(R.id.id_card_2);
         ok_idcard=(EditText) findViewById(R.id.ok_idcard);
         ok_phone_1=(EditText) findViewById(R.id.ok_phone_1);
         ok_phone_2=(EditText) findViewById(R.id.ok_phone_2);
@@ -96,8 +104,17 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
         user_add_back= (RelativeLayout) findViewById(R.id.user_add_back);
         user_add_back.setOnClickListener(this);
         area_text_2= (TextView) findViewById(R.id.area_text_2);
+        id_phone_2= (TextView) findViewById(R.id.id_phone_2);
+        id_phone_3= (TextView) findViewById(R.id.id_phone_3);
+        progressDialog = new Dialog(JoinActivity.this,R.style.progress_dialog);
+        progressDialog.setContentView(R.layout.dialog);
+        progressDialog.setCancelable(true);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView msg = (TextView) progressDialog.findViewById(R.id.id_tv_loadingmsg);
+        msg.setText("加载中...");
         edit_onclic();
         edit_onclic_2();
+        initListener();
         handler_2.postDelayed(runnable_2, 500);
         if(BPApplication.getInstance().getIsadd().equals("2")){
             mWheelType = CityConfig.WheelType.PRO_CITY;
@@ -164,6 +181,7 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
                        ToastUtils.showToast(JoinActivity.this,"手机号码输入不一致，请确认");
                        return;
                    }
+                   progressDialog.show();
                    String paren_id = BPApplication.getInstance().getMember_Id();
                    String lv_id=BPApplication.getInstance().getIsadd();
                    Map<String,String > map = new HashMap<>();
@@ -187,6 +205,9 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
                    mainPresenter.postMap(SystemConstant.PublicConstant.API_ADD_PARTNER,map);
                    break;
                case R.id.ok_choice:
+                   id_card_2.setVisibility(View.GONE);
+                   id_phone_2.setVisibility(View.GONE);
+                   id_phone_3.setVisibility(View.GONE);
                    wheel();
                    break;
                case R.id.user_add_back:
@@ -236,6 +257,7 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
             public void run() {
                 JSONObject jsonObject = JSONObject.fromObject(s);
                 if(jsonObject.getString("success").equals("true")){
+                    progressDialog.dismiss();
                     android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(JoinActivity.this);
                     builder.setTitle("温馨提示");
                     builder.setMessage("添加成功");
@@ -243,13 +265,18 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            EventBus.getDefault().post(new MainSendEvent("加入成功"));
+                            if(BPApplication.getInstance().getIsadd().equals("2")){
+                                EventBus.getDefault().post(new MainSendEvent("G级加入成功"));
+                            }else {
+                                EventBus.getDefault().post(new MainSendEvent("C级加入成功"));
+                            }
                             finish();
                         }
                     });
                     builder.setIcon(R.drawable.xiufanghua);
                     builder.show();
                 }else {
+                    progressDialog.dismiss();
                     android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(JoinActivity.this);
                     builder.setTitle("温馨提示");
                     builder.setMessage(jsonObject.getString("msg"));
@@ -288,8 +315,14 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
     }
 
     @Override
-    public void fail(String s) {
-
+    public void fail(final String s) {
+          runOnUiThread(new Runnable() {
+              @Override
+              public void run() {
+                  progressDialog.dismiss();
+                  ToastUtils.showToast(JoinActivity.this,"网络连接超时，请稍后再试");
+              }
+          });
     }
 
     @Override
@@ -436,5 +469,137 @@ public class JoinActivity extends BaseActivity implements View.OnClickListener,M
             }
         });
         CityPickerView.getInstance().showCityPicker(this);
+    }
+
+    private void initListener() {
+//        ok_idcard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                id_phone_2.setVisibility(View.GONE);
+//                id_phone_3.setVisibility(View.GONE);
+//            }
+//        });
+//        ok_phone_1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                id_card_2.setVisibility(View.GONE);
+//                id_phone_3.setVisibility(View.GONE);
+//            }
+//        });
+//        ok_phone_2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                id_phone_2.setVisibility(View.GONE);
+//                id_card_2.setVisibility(View.GONE);
+//            }
+//        });
+        ok_idcard.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String numbers = editable.toString();
+                if(numbers.length()>0&&numbers.length()<=18){
+                    id_card_2.setVisibility(View.VISIBLE);
+                    if(numbers.length()>0&&numbers.length()<=6){
+                        id_card_2.setText(numbers);
+                    } else if(numbers.length()>6&&numbers.length()<=14){
+//                        numbers_2=numbers;
+                        numbers_1=numbers.substring(0,6);
+                        numbers_2=numbers.substring(6,numbers.length());
+                        id_card_2.setText(numbers_1+" "+numbers_2);
+                    }else if(numbers.length()>14){
+                        numbers_1=numbers.substring(0,6);
+                        numbers_2=numbers.substring(6,14);
+                        numbers_3=numbers.substring(14,numbers.length());
+                        id_card_2.setText(numbers_1+" "+numbers_2+" "+numbers_3);
+                    }
+                }
+                if(numbers.length()==18){
+                    id_card_2.setVisibility(View.GONE);
+                }
+                if(numbers.length()==0){
+                    id_card_2.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        ok_phone_1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String numbers = editable.toString();
+                if(numbers.length()>0&&numbers.length()<=11){
+                    id_phone_2.setVisibility(View.VISIBLE);
+                    if(numbers.length()>0&&numbers.length()<=3){
+                        id_phone_2.setText(numbers);
+                    } else if(numbers.length()>3&&numbers.length()<=7){
+//                        numbers_2=numbers;
+                        numbers_1=numbers.substring(0,3);
+                        numbers_2=numbers.substring(3,numbers.length());
+                        id_phone_2.setText(numbers_1+" "+numbers_2);
+                    }else if(numbers.length()>7){
+                        numbers_1=numbers.substring(0,3);
+                        numbers_2=numbers.substring(3,7);
+                        numbers_3=numbers.substring(7,numbers.length());
+                        id_phone_2.setText(numbers_1+" "+numbers_2+" "+numbers_3);
+                    }
+                }
+                if(numbers.length()==11){
+                    id_phone_2.setVisibility(View.GONE);
+                }
+                if(numbers.length()==0){
+                    id_phone_2.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        ok_phone_2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String numbers = editable.toString();
+                if(numbers.length()>0&&numbers.length()<=11){
+                    id_phone_3.setVisibility(View.VISIBLE);
+                    if(numbers.length()>0&&numbers.length()<=3){
+                        id_phone_3.setText(numbers);
+                    } else if(numbers.length()>3&&numbers.length()<=7){
+//                        numbers_2=numbers;
+                        numbers_1=numbers.substring(0,3);
+                        numbers_2=numbers.substring(3,numbers.length());
+                        id_phone_3.setText(numbers_1+" "+numbers_2);
+                    }else if(numbers.length()>7){
+                        numbers_1=numbers.substring(0,3);
+                        numbers_2=numbers.substring(3,7);
+                        numbers_3=numbers.substring(7,numbers.length());
+                        id_phone_3.setText(numbers_1+" "+numbers_2+" "+numbers_3);
+                    }
+                }
+                if(numbers.length()==11){
+                    id_phone_3.setVisibility(View.GONE);
+                }
+                if(numbers.length()==0){
+                    id_phone_3.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
 }

@@ -2,21 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:myEditHnyer="http://schemas.android.com/apk/res-auto"
     android:background="#323233"
     android:orientation="vertical">
     <RelativeLayout
         android:background="#333434"
         android:layout_width="match_parent"
-        android:layout_height="50px">
+        android:layout_height="17dp">
 
     </RelativeLayout>
     <RelativeLayout
         android:background="#333434"
         android:layout_width="match_parent"
-        android:layout_height="150px">
+        android:layout_height="50dp">
         <RelativeLayout
             android:id="@+id/user_add_back"
-            android:layout_width="160px"
+            android:layout_width="53dp"
             android:layout_height="match_parent">
 
             <ImageView
@@ -35,7 +36,7 @@
             android:layout_centerVertical="true"
             android:text="添加成员"
             android:textColor="@color/white"
-            android:textSize="54px" />
+            android:textSize="18dp" />
 
 
     </RelativeLayout>
@@ -50,12 +51,12 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="125px"
-            android:layout_marginStart="125px"
-            android:layout_marginTop="80px"
+            android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="27dp"
             android:text="恭喜您的团队又壮大了！"
             android:textColor="#D6D6D6"
-            android:textSize="51px"
+            android:textSize="17dp"
             android:id="@+id/textView2" />
 
         <TextView
@@ -64,10 +65,10 @@
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignStart="@+id/textView2"
             android:layout_below="@+id/textView2"
-            android:layout_marginTop="57px"
+            android:layout_marginTop="19dp"
             android:text="请录入您下级事业合伙人的有效信息"
             android:textColor="#D6D6D6"
-            android:textSize="45px" />
+            android:textSize="15dp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -76,10 +77,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <RelativeLayout
-            android:layout_marginTop="35px"
+            android:layout_marginTop="7dp"
             android:id="@+id/ok_choice"
             android:layout_width="match_parent"
-            android:layout_height="120px">
+            android:layout_height="40dp">
 
             <TextView
                 android:id="@+id/editText"
@@ -92,15 +93,15 @@
                 android:hint="负责区域："
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="43px"
+                android:textSize="14dp"
                 android:theme="@style/MyEditText" />
 
             <TextView
-                android:layout_marginBottom="22px"
-                android:layout_marginLeft="130px"
-                android:layout_marginRight="130px"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="43dp"
+                android:layout_marginRight="43dp"
                 android:layout_width="match_parent"
-                android:layout_height="5px"
+                android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:background="@color/primary_blue"
@@ -121,11 +122,11 @@
                 android:layout_alignRight="@+id/textViesw2"
                 android:text=""
                 android:textColor="#399BFF"
-                android:textSize="43px" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/area_text"
-                android:textSize="43px"
+                android:textSize="14dp"
                 android:textColor="#399BFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,63 +140,108 @@
         </RelativeLayout>
 
         <EditText
-            android:layout_marginTop="35px"
+            android:layout_marginTop="7dp"
             android:id="@+id/ok_area"
             android:theme="@style/MyEditText"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
-            android:textSize="43px"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:textSize="14dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:hint="负责范围备注"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
-            android:layout_marginTop="25px"
+            android:layout_marginTop="8dp"
             android:id="@+id/ok_name"
             android:theme="@style/MyEditText"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
-            android:textSize="43px"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:textSize="14dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:hint="请输入姓名"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <EditText
-            android:layout_marginTop="35px"
-            android:id="@+id/ok_idcard"
-            android:theme="@style/MyEditText"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
-            android:textSize="43px"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:hint="请输入身份证号码"
-            android:layout_width="match_parent"
+            <!--<com.example.asus.zlzjqrcode.utils.FloatLabeledEditText-->
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--myEditHnyer:fletBackground="@drawable/round_blue_2"-->
+                <!--myEditHnyer:fletTextAppearance="@style/floatlabelededittext"-->
+                <!--&gt;-->
+            <TextView
+                android:visibility="gone"
+                android:padding="3dp"
+                android:layout_marginBottom="-15dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/round_textview"
+                android:id="@+id/id_card_2"
+                android:text="szzz"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="7dp"
+                    android:id="@+id/ok_idcard"
+                    android:theme="@style/MyEditText"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:hint="请输入身份证号码"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            <!--</com.example.asus.zlzjqrcode.utils.FloatLabeledEditText>-->
+        <TextView
+            android:visibility="gone"
+            android:padding="3dp"
+            android:layout_marginBottom="-15dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/round_textview"
+            android:id="@+id/id_phone_2"
+            android:text="szzz"
+            android:textColor="@color/black"
+            android:textSize="19dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-
-
         <EditText
-            android:layout_marginTop="35px"
+            android:layout_marginTop="7dp"
             android:id="@+id/ok_phone_1"
             android:theme="@style/MyEditText"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
-            android:textSize="43px"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:textSize="14dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:hint="请输入手机号"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <TextView
+            android:visibility="gone"
+            android:padding="3dp"
+            android:layout_marginBottom="-15dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/round_textview"
+            android:id="@+id/id_phone_3"
+            android:text="szzz"
+            android:textColor="@color/black"
+            android:textSize="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <EditText
-            android:layout_marginTop="35px"
+            android:layout_marginTop="7dp"
             android:id="@+id/ok_phone_2"
             android:theme="@style/MyEditText"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
-            android:textSize="43px"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:textSize="14dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:hint="请确认手机号"
@@ -203,15 +249,15 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/ok_ok"
-            android:layout_marginTop="80px"
+            android:layout_marginTop="27dp"
             android:textColor="@color/white"
-            android:textSize="45px"
+            android:textSize="15dp"
             android:background="@drawable/round_blue"
             android:text="确认提交"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:layout_width="match_parent"
-            android:layout_height="120px" />
+            android:layout_height="40dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -227,7 +273,7 @@
             android:layout_marginTop="20dp"
             android:text="秀芳华全球合伙人营销管理系统"
             android:textColor="#D6D6D6"
-            android:textSize="48px" />
+            android:textSize="16dp" />
     </RelativeLayout>
 
 

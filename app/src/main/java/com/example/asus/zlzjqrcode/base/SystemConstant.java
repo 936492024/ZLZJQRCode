@@ -111,6 +111,24 @@ public class SystemConstant {
                 + "api/get-areas";
 
 
+
+        //根据member_id查询下级数据
+        public static final String API_GET_LEVEL=HTTP
+                + "api/get-level";
+
+
+
+
+        //根据member_id查询下级数据
+        public static final String API_GET_TOTAL=HTTP
+                + "api/get-total";
+
+
+        //根据member_id查询下级数据
+        public static final String API_GET=HTTP
+                + "api/get-teamer";
+
+
     }
 
 }

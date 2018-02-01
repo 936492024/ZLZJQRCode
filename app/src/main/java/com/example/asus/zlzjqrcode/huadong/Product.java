@@ -80,7 +80,6 @@ public class Product implements Serializable {
     }
 
 
-
     @Override
     public String toString() {
         return "Product{" +
@@ -88,7 +87,8 @@ public class Product implements Serializable {
                 ", idcard='" + idcard + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", count='" + count + '\'' +
+                ", member_id='" + member_id + '\'' +
+                ", isshow='" + isshow + '\'' +
                 '}';
     }
-
 }

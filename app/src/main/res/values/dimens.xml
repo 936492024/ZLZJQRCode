@@ -22,6 +22,9 @@
     <dimen name="clock_weight">800px</dimen>
     <dimen name="clock_height">400px</dimen>
 
+    <dimen name="clock_heightss">160dp</dimen>
+
+
     <dimen name="stamp">360px</dimen>
     <dimen name="clock_weights">280dp</dimen>
     <dimen name="clock_heights">220dp</dimen>

@@ -49,11 +49,6 @@ public class MyListViewAdapter extends BaseAdapter {
             } else {
                 viewHolder = (ViewHolder)convertView.getTag();
             }
-            if (defItem == 0) {
-                convertView.setBackgroundResource(R.color.primary_blue);
-            } else {
-                convertView.setBackgroundResource(android.R.color.white);
-            }
             viewHolder.tv_item_2.setText(item.getString("citys"));
         }else {
             if (convertView == null) {
@@ -66,7 +61,6 @@ public class MyListViewAdapter extends BaseAdapter {
             } else {
                 viewHolder = (ViewHolder)convertView.getTag();
             }
-
             viewHolder.tv_item_3_text1.setText(item.getString("areas"));
             viewHolder.tv_item_3_text2.setText(item.getString("name")+"("+item.getString("total_count")+"人)");
         }
@@ -94,8 +88,4 @@ public class MyListViewAdapter extends BaseAdapter {
         TextView tv_item_2,tv_item_3_text1,tv_item_3_text2;
     }
 
-    public void setDefSelect(int position) {
-        this.defItem = position;
-        notifyDataSetChanged();
-    }
 }

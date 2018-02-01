@@ -1,6 +1,7 @@
 package com.example.asus.zlzjqrcode.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -17,10 +19,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,9 +47,15 @@ import com.example.asus.zlzjqrcode.base.BPApplication;
 import com.example.asus.zlzjqrcode.base.BaseActivity;
 import com.example.asus.zlzjqrcode.base.SystemConstant;
 import com.example.asus.zlzjqrcode.eventbus.MainSendEvent;
+import com.example.asus.zlzjqrcode.money_list.C_Money_Activity;
+import com.example.asus.zlzjqrcode.money_list.G_Money_Activity;
+import com.example.asus.zlzjqrcode.money_list.T_Money_Activity;
 import com.example.asus.zlzjqrcode.network.MainPresenter;
 import com.example.asus.zlzjqrcode.network.MainView;
 import com.example.asus.zlzjqrcode.service.DemoService_2;
+import com.example.asus.zlzjqrcode.uset_list.C_List_Activity;
+import com.example.asus.zlzjqrcode.uset_list.G_ListActivity;
+import com.example.asus.zlzjqrcode.uset_list.T_List_Activity;
 import com.example.asus.zlzjqrcode.utils.CreateMD5;
 import com.example.asus.zlzjqrcode.utils.CustomVersionDialogActivity;
 import com.example.asus.zlzjqrcode.utils.ImgUtils;
@@ -52,14 +66,16 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+import cn.sharesdk.wechat.friends.Wechat;
+import cn.sharesdk.wechat.moments.WechatMoments;
 import de.greenrobot.event.EventBus;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -81,7 +97,7 @@ public class Main_Activity extends BaseActivity implements View.OnClickListener 
     private MainPresenter mainPresenter;
     private Button share_code;
     private ImageView code_image;
-
+    private String names;
     private static final String SAVE_PIC_PATH = Environment.getExternalStorageState().equalsIgnoreCase(Environment.MEDIA_MOUNTED) ? Environment.getExternalStorageDirectory().getAbsolutePath() :
             "/mnt/sdcard";//保存到SD卡
     private static final String SAVE_REAL_PATH = SAVE_PIC_PATH + "/good/savePic";
@@ -135,6 +151,9 @@ public class Main_Activity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
 //                    code_image.setImageBitmap(resource);
+                        Log.e("大小", bmp_2+"");
+
+
                         bmp_2=resource;
                         code_image.setImageBitmap(mergeBitmap(resource,bmp));
                     }
@@ -187,8 +206,16 @@ public class Main_Activity extends BaseActivity implements View.OnClickListener 
                 if(!checkIsLogined()){//未登录
                     return;
                 }else {
-                    intent = new Intent(Main_Activity.this,UserListActivity.class);
-                    startActivity(intent);
+                    if(BPApplication.getInstance().getIsadd().equals("2")){
+                        intent = new Intent(Main_Activity.this,G_ListActivity.class);
+                        startActivity(intent);
+                    }else if(BPApplication.getInstance().getIsadd().equals("0")){
+                        intent = new Intent(Main_Activity.this,T_List_Activity.class);
+                        startActivity(intent);
+                    }else {
+                        intent = new Intent(Main_Activity.this,C_List_Activity.class);
+                        startActivity(intent);
+                    }
                 }
                 break;
             case R.id.name:
@@ -202,10 +229,24 @@ public class Main_Activity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.money:
-                intent = new Intent(Main_Activity.this,MoneyActivity.class);
-                startActivity(intent);
+                if(!checkIsLogined()){//未登录
+                    return;
+                }else {
+                    if(BPApplication.getInstance().getIsadd().equals("0")){
+                        intent = new Intent(Main_Activity.this,T_Money_Activity.class);
+                        startActivity(intent);
+                    }else if(BPApplication.getInstance().getIsadd().equals("2")){
+                        intent = new Intent(Main_Activity.this,G_Money_Activity.class);
+                        startActivity(intent);
+                    }else {
+                        intent = new Intent(Main_Activity.this,C_Money_Activity.class);
+                        startActivity(intent);
+                    }
+                }
                 break;
             case R.id.share_code:
+//                Log.e("大小", getBitmapSize(createBitmapThumbnail((mergeBitmap(bmp_2, bmp)),true))+"");
+//                game_clock_pay_dialog();
                 requestPermission();
                 break;
         }
@@ -529,5 +570,152 @@ public class Main_Activity extends BaseActivity implements View.OnClickListener 
         canvas.drawBitmap(firstBitmap, new Matrix(), null);
         canvas.drawBitmap(secondBitmap, firstBitmap.getWidth()/2-45, firstBitmap.getHeight()/2-45, null);
         return bitmap;
+    }
+
+    private void showShare() {
+        names= BPApplication.getInstance().getName();
+        OnekeyShare oks = new OnekeyShare();
+        oks.disableSSOWhenAuthorize();
+        oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+            @Override
+            public void onShare(Platform platform, Platform.ShareParams paramsToShare) {
+                if("Wechat".equals(platform.getName())){
+                    paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+                    paramsToShare.setTitle(names+"邀请你加入秀芳华营销系统");
+                    paramsToShare.setText("秀出美丽，分享故事，圆梦人生");
+                    paramsToShare.setUrl("http://app.zlzjcyw.com/yx.html");
+                    paramsToShare.setImageUrl("http://hbhz1.sesdf.org/logo108.png");
+                }else if("WechatMoments".equals(platform.getName())){
+                    paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+                    paramsToShare.setTitle(names+"邀请你加入秀芳华营销系统");
+                    paramsToShare.setUrl("http://app.zlzjcyw.com/yx.html");
+                    paramsToShare.setImageUrl("http://hbhz1.sesdf.org/logo108.png");
+                }
+            }
+        });
+        //启动分享
+        oks.show(this);
+    }
+
+    private void showShare(String platform) {
+        names= BPApplication.getInstance().getName();
+        final OnekeyShare oks = new OnekeyShare();
+        //指定分享的平台，如果为空，还是会调用九宫格的平台列表界面
+        if (platform != null) {
+            oks.setPlatform(platform);
+        }
+        //关闭sso授权
+//        oks.disableSSOWhenAuthorize();
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+//        if(BPApplication.getInstance().getIsadd().equals("0")){
+//            if(mergeBitmap(bmp_2, bmp)!=null){
+//                oks.setImageData(mergeBitmap(bmp_2, bmp));
+//            }
+//        }
+//        else {
+//        oks.setTitle(names+"邀请你加入秀芳华营销系统");
+//        // titleUrl是标题的网络链接，仅在Linked-in,QQ和QQ空间使用
+//        oks.setTitleUrl("http://app.zlzjcyw.com/yx.html");
+//        // text是分享文本，所有平台都需要这个字段
+//        oks.setText("秀出美丽，分享故事，圆梦人生");
+//        //分享网络图片，新浪微博分享网络图片需要通过审核后申请高级写入接口，否则请注释掉测试新浪微博
+//        oks.setImageUrl("http://hbhz1.sesdf.org/logo108.png");
+//        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+//        // url仅在微信（包括好友和朋友圈）中使用
+//        oks.setUrl("http://app.zlzjcyw.com/yx.html");
+//        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+//        oks.setComment("秀出美丽，分享故事，圆梦人生");
+//        // site是分享此内容的网站名称，仅在QQ空间使用
+//        oks.setSite(names+"邀请你加入秀芳华营销系统");
+//        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+//        oks.setSiteUrl("http://app.zlzjcyw.com/yx.html/");
+        //启动分享
+        oks.setImageData(createBitmapThumbnail(mergeBitmap(bmp_2, bmp),false));
+//        }
+        oks.show(this);
+    }
+    public static Bitmap createBitmapThumbnail(Bitmap bitMap, boolean needRecycle) {
+        int width = bitMap.getWidth();
+        int height = bitMap.getHeight();
+        // 设置想要的大小
+        int newWidth = 80;
+        int newHeight = 80;
+        // 计算缩放比例
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片
+        Bitmap newBitMap = Bitmap.createBitmap(bitMap, 0, 0, width, height,
+                matrix, true);
+        if (needRecycle) bitMap.recycle();
+        return newBitMap;
+    }
+
+    public static int getBitmapSize(Bitmap bitmap) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {    //API 19
+            return bitmap.getAllocationByteCount();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {//API 12
+            return bitmap.getByteCount();
+        }
+        // 在低版本中用一行的字节x高度
+        return bitmap.getRowBytes() * bitmap.getHeight();                //earlier version
+    }
+    @SuppressWarnings("static-access")
+    public void game_clock_pay_dialog() {
+        final LayoutInflater inflater = LayoutInflater.from(Main_Activity.this);
+        View view = inflater.inflate(R.layout.game_clock_pay_dialog, null);
+        final Dialog dialog = new Dialog(Main_Activity.this);
+        final RelativeLayout wechat = (RelativeLayout) view.findViewById(R.id.wechat);
+        final RelativeLayout wechat_moment = (RelativeLayout) view.findViewById(R.id.wechat_moment);
+        final RelativeLayout save_imagive = (RelativeLayout) view.findViewById(R.id.save_imagive);
+        final TextView cancel = (TextView) view.findViewById(R.id.cancel);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0xffffff));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(true);//
+        dialog.show();
+
+        // 设置宽度为屏幕的宽度
+        WindowManager windowManager = getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+        lp.width =  (display.getWidth()); // 设置宽度
+        lp.height=getResources().getDimensionPixelSize(R.dimen.clock_heightss);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.mainfstyle);
+        dialog.getWindow().setAttributes(lp);
+        dialog.getWindow().setContentView(view);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        wechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showShare(Wechat.NAME);
+                dialog.dismiss();
+            }
+        });
+        wechat_moment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showShare(WechatMoments.NAME);
+                dialog.dismiss();
+            }
+        });
+        save_imagive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestPermission();
+                dialog.dismiss();
+            }
+        });
     }
 }
